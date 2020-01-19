@@ -54,8 +54,14 @@ namespace ConsoleApp3
         public int getDamage()
         {
             int damage = 0;
-            if(spell!=null)
-                damage = spell.getDamage() + thing.getMagicalAP();
+            if(spell!=null) 
+            {
+                damage = spell.getDamage();
+                if(damage >= 0)
+                    damage += thing.getMagicalAP();
+                else
+                    damage -= thing.getMagicalAP();
+            }
             else if(melee!=null)
                 damage = melee.getDamage() + thing.getMeleeAP();
             else if(ranged!=null)
@@ -75,6 +81,20 @@ namespace ConsoleApp3
                 effect = ranged.getEffect();
 
             return effect;
+        }
+
+        public Buff getBuff()
+        {
+            Buff buff = null;
+
+            if (spell!=null && spell.hasBuff())
+                buff = spell.getBuff();
+            else if (melee!=null && melee.hasBuff())
+                buff = melee.getBuff();
+            else if (ranged!=null && ranged.hasBuff())
+                buff = ranged.getBuff();
+
+            return buff;
         }
 
         public bool isBasic()

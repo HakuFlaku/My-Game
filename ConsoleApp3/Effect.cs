@@ -60,10 +60,22 @@ namespace ConsoleApp3
             bonus = b;
         }
 
+        protected void printInfo(GenericPerson creature, int num) {
+            if(creature.GetType().IsSubclassOf(typeof(GenericCreature)))
+            {//this is a creature
+               printInfoCreature(creature, num);
+            }
+            else 
+            {//otherwise, it's the player
+               printInfoPlayer(creature, num);
+            }
+        }
+
         public abstract Effect copy();
         public abstract void doEffect(GenericPerson creature);
-        public abstract String description();
+        public abstract void applied();
         public abstract override string ToString();
-        public abstract String info();
+        protected abstract void printInfoCreature(GenericPerson creature, int num);
+        protected abstract void printInfoPlayer(GenericPerson player, int num);
     }
 }

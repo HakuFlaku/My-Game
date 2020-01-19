@@ -298,6 +298,7 @@ namespace ConsoleApp3
         }
 
         //the player can only be attacked with basic attacks, and so, just subtract the damage that would be dealt and deal the remaining to the player if it's positive
+        //need to allow for magic damage to be dealt to the player
         public override void attacked(Attack attack)
         {
             int damage = getDamage(attack);
@@ -306,18 +307,18 @@ namespace ConsoleApp3
             {
                 if (damage >= 0)
                 {
-                    Constants.writeLine("You were hit for&12 " + damage + "&15!");
+                    Constants.writeLine("You were hit for&4 " + damage + "&15!");
                 }
                 else
                 {
-                    Constants.writeLine("You where healed for&12 " + damage + "&15!");
+                    Constants.writeLine("You where healed for&4 " + -damage + "&15!");
                 }
                 currHP -= damage;
                 if (attack.hasEffect())
                     applyEffect(attack.effect);
             }
             else
-                Constants.writeLine("Creature missed their attack!");
+                Constants.writeLine("You were missed!");
         }
 
         public override void doEffects()
@@ -333,12 +334,6 @@ namespace ConsoleApp3
                     if (eff.isActive())
                     {
                         eff.doEffect(this);
-                        if (eff.getName().Equals("EffectHeal"))
-                        {
-                            Constants.writeLine("You just " + eff.info());
-                        }
-                        else
-                            Constants.writeLine("You just took " + eff.info());
                     }
                     else
                     {

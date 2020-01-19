@@ -9,6 +9,7 @@ namespace ConsoleApp3
         private readonly int rank;//what level this spell is regarded as
         private int damage;//represents the base damage this spell does without any modifiers.
         private readonly Effect effect;
+        private readonly Buff buff;
         private readonly String description;
 
         //standard constructor for a spell
@@ -17,6 +18,7 @@ namespace ConsoleApp3
             rank = r;
             damage = setDamage();
             effect = setEffect();
+            buff = setBuff();
             description = setDescription();
         }
 
@@ -61,6 +63,15 @@ namespace ConsoleApp3
             return eCopy;
         }
 
+        private Buff setBuff() 
+        {
+            Buff ret = null;
+
+            
+
+            return ret;
+        }
+
         //sets the damage for this spell based on the rank with a variance
         private int setDamage()
         {
@@ -92,7 +103,7 @@ namespace ConsoleApp3
 
         public bool hasBuff()
         {
-            throw new NotImplementedException();
+            return buff != null;
         }
 
         public int getRank()
@@ -116,6 +127,10 @@ namespace ConsoleApp3
             return effect;
         }
 
+        public Buff getBuff() {
+            return buff;
+        }
+
         //every spell must have a ToString
         public override String ToString()
         {
@@ -133,12 +148,12 @@ namespace ConsoleApp3
         //calculate what this spell would cost for the player to purchase it
         public int getCost()
         {
-            int totalCost = (damage * 4) / rank;//functional relation based on just the rank and the damage, the higher the damage with a low rank makes it cost more
+            int totalCost = (Math.Abs(damage) * 4) / rank;//functional relation based on just the rank and the damage, the higher the damage with a low rank makes it cost more
 
             if (hasEffect())
                 totalCost = (int)(totalCost * 2.5);
-            //if (hasBuff())
-                //totalCost = (int)(totalCost * 2.5);
+            if (hasBuff())
+                totalCost = (int)(totalCost * 2.5);
 
             return totalCost;
         }

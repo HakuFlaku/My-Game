@@ -11,7 +11,7 @@ namespace ConsoleApp3
         protected int currHP, maxHP, hPIncMax, meleeAP, rangeAP, magicalAP, magicalDefense, basicDefense, level;
         protected bool isDefending, canAttack;
         protected String name;
-        protected LinkedList effects;
+        protected LinkedList effects, buffs;
         protected LinkedList spellSlots;//this is a list that contains lists of the different levels of spells and how many slots are left and the max of that
         protected LinkedList meleeAttacks;//can have different types of melee attacks to choose from, same with ranged attacks
         protected LinkedList rangedAttacks;
@@ -28,6 +28,7 @@ namespace ConsoleApp3
             this.name = name;
             currHP = maxHP = hp;
             effects = new LinkedList();
+            buffs = new LinkedList();
             spellSlots = new LinkedList();
             meleeAttacks = new LinkedList();
             rangedAttacks = new LinkedList();
@@ -56,7 +57,7 @@ namespace ConsoleApp3
                     defense = 1;
             }
 
-            if (attack.isBasic)
+            if (damage > 0)
             {
                 damage -= defense;
 
@@ -82,10 +83,18 @@ namespace ConsoleApp3
             canAttack = true;
         }
 
-        //adjust creatures health aditively
-        public void adjustHealth(int amount)
+        //deal damage to this creature
+        public int hurt(int num)
         {
-            currHP += amount;
+            if(num < 0)//try'd to hurt with a negative number, this is an error
+            {
+                Constants.writeLine("&4ERROR&15:: tried to hurt with a negative number.");
+            }
+            else 
+            {
+                currHP -= num;
+            }
+            return num;
         }
 
         //checks if this creature is still alive, simply a creature is alive if it has a positive integer for it's health, and dead otherwise
@@ -95,9 +104,28 @@ namespace ConsoleApp3
         }
 
         //heal the creature by the provided number
-        public void heal(int num)
+        public int heal(int num)
         {
-            currHP += num;
+            int amtHeald = num;
+            if(num < 0)//try'd to heal with a negative number, this is an error
+            {
+                Constants.writeLine("&4ERROR&15:: tried to heal with a negative number.");
+            }
+            else if(num > missingHealth())//only heal to max health, don't heal over max
+            {
+                currHP += missingHealth();
+                amtHeald = missingHealth();
+            }
+            else 
+            {
+                currHP += num;
+            }
+            return amtHeald;
+        }
+
+        protected int missingHealth() 
+        {
+            return maxHP - currHP;
         }
 
         internal int getMagicalAP()
@@ -132,8 +160,16 @@ namespace ConsoleApp3
         {
             if (Constants.rand.NextDouble() > Constants.STATUS_EFFECT_CHANCE)
             {
-                Constants.writeLine(effect.description());
+                effect.applied();
                 effects.newItem(effect);
+            }
+        }
+
+        protected void applyBuff(Buff buff) {
+            if (Constants.rand.NextDouble() > Constants.BUFF_APPLY_CHANCE)
+            {
+                buff.applied();
+                buffs.newItem(buff);
             }
         }
 

@@ -19,5 +19,9 @@ namespace ConsoleApp3
             person.attacked();//by doing this, it prevents this person from doing another attack
             time--;
         }
+
+        public override void applied() {
+            
+        }
     }
 }

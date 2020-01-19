@@ -25,6 +25,7 @@ namespace ConsoleApp3
         //Things for combat control
         public const double HIT_CHANCE = 0.15;//gives a value less than 1, to indicate the chance that an attack misses
         public const double STATUS_EFFECT_CHANCE = 0.25;//gives a value of the chance a status effect is NOT applied
+        public const double BUFF_APPLY_CHANCE = 0.15;//the chance for the buff to not be applied
         public const int BASE_CREATURES = 1;
         public const int UPDATE_CHALLENGE = 2;
         public const double DEFENDING_MULTIPLIER = 1.5;

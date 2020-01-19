@@ -18,16 +18,17 @@ namespace ConsoleApp3
         }
 
         //decrease time as effect has happened, and adjust the creatures health
-        public override void doEffect(GenericPerson Creature)
+        public override void doEffect(GenericPerson creature)
         {
             time--;
             int damage = bonus + amount;
-            Creature.adjustHealth(-damage);
+            int burnt = creature.hurt(damage);
+            printInfo(creature, burnt);
         }
 
-        public override String description()
+        public override void applied()
         {
-            return "Attack ignited this creature!";
+            Constants.writeLine("Attack ignited this creature!");
         }
 
         public override string ToString()
@@ -35,9 +36,12 @@ namespace ConsoleApp3
             return "Lights target on fire.";
         }
 
-        public override string info()
-        {
-            return amount + " fire damage.";
+        protected override void printInfoCreature(GenericPerson creature, int num) {
+            Constants.writeLine(creature.getName() + " has been burnt for&7 " + num + "&14 HP.");
+        }
+
+        protected override void printInfoPlayer(GenericPerson player, int num) {
+            Constants.writeLine("You have been burnt for&7 " + num + "&14 HP.");
         }
 
         public override Effect copy()

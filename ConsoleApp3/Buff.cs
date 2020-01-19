@@ -22,5 +22,6 @@ namespace ConsoleApp3
         }
 
         public abstract void doBuff(GenericPerson person);
+        public abstract void applied();
     }
 }

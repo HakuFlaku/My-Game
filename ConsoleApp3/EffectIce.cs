@@ -25,24 +25,29 @@ namespace ConsoleApp3
             return effect;
         }
 
-        public override string description()
+        public override void applied()
         {
-            return "Target is frozen. They can't attack till they unfreeze.";
+            Constants.writeLine("Target is frozen. They can't attack till they unfreeze.");
         }
 
         public override void doEffect(GenericPerson creature)
         {
-            creature.adjustHealth(-amount);
+            int num = creature.hurt(amount + bonus);
             if (buff.isActive())
             {
                 buff.doBuff(creature);
             }
             time--;
+            printInfo(creature, num);
         }
 
-        public override string info()
-        {
-            return amount + " ice damage and can't attack this turn.";
+        //change these yet
+        protected override void printInfoCreature(GenericPerson creature, int num) {
+            Constants.writeLine(creature.getName() + " has been froze for&7 " + num + "&14 HP");
+        }
+
+        protected override void printInfoPlayer(GenericPerson player, int num) {
+            Constants.writeLine("You have been froze for&7 " + num + "&14 HP.");
         }
 
         public override string ToString()

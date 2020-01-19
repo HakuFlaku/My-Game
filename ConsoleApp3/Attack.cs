@@ -13,19 +13,23 @@ namespace ConsoleApp3
         public readonly bool isBasic;
         public readonly int damage;//how much damage is being done, note this can be negative to show that it heals.
         public readonly Effect effect;//the effect that is being applied
-        //public readonly Buff buff;//the buff that is being applied WIP
+        public readonly Buff buff;//the buff that is being applied
 
         public Attack(Strike strike)
         {
             isBasic = strike.isBasic();
             damage = strike.getDamage();
             effect = strike.getEffect();
-            //buff = strike.getBuff();
+            buff = strike.getBuff();
         }
 
         public bool hasEffect()
         {
             return effect != null;
+        }
+
+        public bool hasBuff() {
+            return buff !=null;
         }
     }
 }

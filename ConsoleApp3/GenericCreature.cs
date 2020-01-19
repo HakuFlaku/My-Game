@@ -26,7 +26,7 @@ namespace ConsoleApp3
 
             if (Constants.rand.NextDouble() > Constants.HIT_CHANCE)
             {
-                Constants.writeLine("You hit for&12 " + damage + "&15 damage!");
+                Constants.writeLine("You hit for&4 " + damage + "&15 damage!");
                 currHP -= damage;
                 if(attack.hasEffect())
                     applyEffect(attack.effect);
@@ -90,12 +90,6 @@ namespace ConsoleApp3
                     if (effect.isActive())
                     {
                         effect.doEffect(this);
-                        if (effect.getName().Equals("EffectHeal"))
-                        {
-                            Constants.writeLine(name + " just " + effect.info());
-                        }
-                        else
-                            Constants.writeLine(name + " just took " + effect.info());
                         //if (resistances[effect.getType()])
                         //damage /= 2;
                     }

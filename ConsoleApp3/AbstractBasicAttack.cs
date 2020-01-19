@@ -13,17 +13,34 @@ namespace ConsoleApp3
     {
         protected int damage;
         protected Effect effect;
+        protected Buff buff;
 
         public AbstractBasicAttack(int damage)
         {
             this.damage = damage;
             this.effect = null;
+            buff = null;
         }
 
         public AbstractBasicAttack(int damage, Effect effect)
         {
             this.damage = damage;
             this.effect = effect;
+            buff = null;
+        }
+
+        public AbstractBasicAttack(int damage, Buff buff)
+        {
+            this.damage = damage;
+            this.effect = null;
+            this.buff = buff;
+        }
+
+        public AbstractBasicAttack(int damage, Effect effect, Buff buff)
+        {
+            this.damage = damage;
+            this.effect = effect;
+            this.buff = buff;
         }
 
         public int getDamage()
@@ -39,6 +56,16 @@ namespace ConsoleApp3
         public bool hasEffect()
         {
             return effect != null;
+        }
+
+        public Buff getBuff()
+        {
+            return buff;
+        }
+
+        public bool hasBuff()
+        {
+            return buff != null;
         }
 
         public override abstract String ToString();

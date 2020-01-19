@@ -23,6 +23,7 @@ namespace ConsoleApp3
         private int challengeMultiplier;//multiplier for creature level
         private LinkedList creatures;
         private Player player;
+        private const int MENU_RETURN = 5;
 
         //constructor for a new game being made
         public Game()
@@ -40,8 +41,11 @@ namespace ConsoleApp3
             player = new Player(name, jObject);
             floor = Constants.STARTING_FLOOR;
             setChallengeMultiplier();
-            goToShop();
-            playGame();
+            int choice = goToShop();
+            if(choice != 5) 
+            {
+                playGame();
+            }
         }
 
         private void setChallengeMultiplier()
@@ -106,7 +110,7 @@ namespace ConsoleApp3
         }
 
         //load the shop with a random inventory of spells for the player to choose
-        private void goToShop()
+        private int goToShop()
         {
             Shop shop = new Shop(player, challengeMultiplier);
             String shopOptions = "0. Leave shop\n1. Buy a spell\n2. Heal\n3. Display stats\n4. Save game\n5. Exit game";
@@ -127,8 +131,14 @@ namespace ConsoleApp3
                     saveGame();
                 }
                 else if (choice == 5)
-                    System.Environment.Exit(0);
+                {
+                    Constants.writeLine("Are you sure you want to quit? Any unsaved progress will be lost.\n0. Yes\n1. No");
+                    choice = Constants.getUserInput(0, 1);
+                    if(choice == 0)
+                        return MENU_RETURN;
+                }
             } while (choice != 0);
+            return choice;
         }
 
         private void buySpell(Shop shop)

@@ -21,21 +21,25 @@ namespace ConsoleApp3
             return effect;
         }
 
-        public override string description()
+        public override void applied()
         {
-            return "Target is surrounded by a misty green aura. They will heal each turn while this is active.";
+            Constants.writeLine("Target is surrounded by a misty green aura. They will heal each turn while this is active.");
         }
 
         public override void doEffect(GenericPerson creature)
         {
-            creature.adjustHealth(amount);
+            int healedAmount = creature.heal(amount);
             time--;
 
+            printInfo(creature, healedAmount);
         }
 
-        public override string info()
-        {
-            return "healed for&4 " + amount + "&15 HP.";
+        protected override void printInfoCreature(GenericPerson creature, int num) {
+            Constants.writeLine(creature.getName() + " has been healed for&7 " + num + "&14 HP.");
+        }
+
+        protected override void printInfoPlayer(GenericPerson player, int num) {
+            Constants.writeLine("You have been healed for&7 " + num + "&14 HP.");
         }
 
         public override string ToString()
