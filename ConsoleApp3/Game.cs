@@ -395,7 +395,7 @@ namespace ConsoleApp3
             }
 
             Constants.writeLine(display);
-            return Constants.getUserInput(0, creatures.getLength()+2);//+2 since there's two extra options
+            return Constants.getUserInput(0, creatures.getLength()+1);//+1 because of the extra options.
         }
 
         //Has all the creatures left standing attack the player

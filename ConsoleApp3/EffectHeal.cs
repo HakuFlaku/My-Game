@@ -29,17 +29,18 @@ namespace ConsoleApp3
         public override void doEffect(GenericPerson creature)
         {
             int healedAmount = creature.heal(amount);
+            Constants.writeLine("DEBUG:: In EffectHeal, healedAmont == " + healedAmount);
             time--;
 
             printInfo(creature, healedAmount);
         }
 
         protected override void printInfoCreature(GenericPerson creature, int num) {
-            Constants.writeLine(creature.getName() + " has been healed for&7 " + num + "&14 HP.");
+            Constants.writeLine(creature.getName() + " has been healed for&4 " + num + " &15HP.");
         }
 
         protected override void printInfoPlayer(GenericPerson player, int num) {
-            Constants.writeLine("You have been healed for&7 " + num + "&14 HP.");
+            Constants.writeLine("You have been healed for&4 " + num + " &15HP.");
         }
 
         public override string ToString()

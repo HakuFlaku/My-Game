@@ -113,8 +113,10 @@ namespace ConsoleApp3
             }
             else if(num > missingHealth())//only heal to max health, don't heal over max
             {
-                currHP += missingHealth();
                 amtHeald = missingHealth();
+                if(amtHeald < 0)
+                    amtHeald = 0;
+                currHP += missingHealth();
             }
             else 
             {

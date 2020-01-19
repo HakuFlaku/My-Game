@@ -307,13 +307,14 @@ namespace ConsoleApp3
             {
                 if (damage >= 0)
                 {
+                    hurt(damage);
                     Constants.writeLine("You were hit for&4 " + damage + "&15!");
                 }
                 else
                 {
-                    Constants.writeLine("You where healed for&4 " + -damage + "&15!");
+                    int amn = heal(-damage);
+                    Constants.writeLine("You were healed for&4 " + amn + "&15!");
                 }
-                currHP -= damage;
                 if (attack.hasEffect())
                     applyEffect(attack.effect);
             }

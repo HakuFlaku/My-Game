@@ -43,11 +43,11 @@ namespace ConsoleApp3
 
         //change these yet
         protected override void printInfoCreature(GenericPerson creature, int num) {
-            Constants.writeLine(creature.getName() + " has been froze for&7 " + num + "&14 HP");
+            Constants.writeLine(creature.getName() + " has been froze for&4 " + num + " &15HP");
         }
 
         protected override void printInfoPlayer(GenericPerson player, int num) {
-            Constants.writeLine("You have been froze for&7 " + num + "&14 HP.");
+            Constants.writeLine("You have been froze for&4 " + num + " &15HP.");
         }
 
         public override string ToString()
