@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using System.Windows;
 
 //array with options save names/ new games
 //get user choice for which save to use
@@ -14,6 +15,7 @@ namespace ConsoleApp3
 {
     class Program
     {
+        
         private static String newGame = "New Game";
         private static String[] saves = new string[3];
         private static String[] savePaths;

@@ -130,6 +130,7 @@ namespace ConsoleApp3
                     Console.Write(s[i]);
                 System.Threading.Thread.Sleep(5);
             }
+
         }
 
         private static void changeColour(int colour)
